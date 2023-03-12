@@ -11,7 +11,7 @@ public class CounterStore extends Store {
         this(CounterState.from(0));
     }
 
-    public CounterStore(CounterState state) {
+    private CounterStore(CounterState state) {
         this.state = state;
     }
 

@@ -4,15 +4,15 @@ import static com.github.idelstak.fluxfx.example.CounterAction.Type.DECREMENT;
 import static com.github.idelstak.fluxfx.example.CounterAction.Type.INCREMENT;
 import java.util.function.Function;
 
-public class ModifiableCounterState implements Function<CounterAction, CounterState> {
+public class CounterStateReducer implements Function<CounterAction, CounterState> {
 
     private final CounterState state;
 
-    public static CounterState modify(CounterState state, CounterAction action) {
-        return new ModifiableCounterState(state).apply(action);
+    public static CounterState reduce(CounterState state, CounterAction action) {
+        return new CounterStateReducer(state).apply(action);
     }
 
-    private ModifiableCounterState(CounterState state) {
+    private CounterStateReducer(CounterState state) {
         this.state = state;
     }
 

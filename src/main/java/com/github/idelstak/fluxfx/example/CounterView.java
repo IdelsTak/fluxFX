@@ -12,7 +12,7 @@ public class CounterView extends VBox implements View {
 
     private final Label countLabel;
 
-    public CounterView() {
+    public CounterView(Dispatcher dispatcher) {
         countLabel = new Label();
         countLabel.setId("countLabel");
         Button incrementButton = new Button("Increment");
@@ -21,11 +21,11 @@ public class CounterView extends VBox implements View {
         decrementButton.setId("decrementButton");
 
         incrementButton.setOnAction(e -> {
-            Dispatcher.dispatch(new CounterAction(Type.INCREMENT));
+            dispatcher.dispatch(new CounterAction(Type.INCREMENT));
         });
 
         decrementButton.setOnAction(e -> {
-            Dispatcher.dispatch(new CounterAction(Type.DECREMENT));
+            dispatcher.dispatch(new CounterAction(Type.DECREMENT));
         });
 
         getChildren().addAll(countLabel, incrementButton, decrementButton);

@@ -14,17 +14,10 @@ public class CounterStore extends Store {
     @Override
     public void onAction(Action action) {
         if (action instanceof CounterAction counterAction) {
-            switch (counterAction.getType()) {
-                case INCREMENT -> {
-                    state = CounterState.from(state.getCount() + 1);
-                    emitChange(state);
-                }
-                case DECREMENT -> {
-                    state = CounterState.from(state.getCount() - 1);
-                    emitChange(state);
-                }
-            }
+            state = ModifiableCounterState.modify(state, counterAction);
         }
+
+        emitChange(state);
     }
 
 }

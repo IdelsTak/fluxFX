@@ -7,8 +7,16 @@ public class CounterStore extends Store {
 
     private CounterState state;
 
+    public CounterStore() {
+        this(CounterState.from(0));
+    }
+
     public CounterStore(CounterState state) {
         this.state = state;
+    }
+
+    public CounterState getState() {
+        return state;
     }
 
     @Override

@@ -22,7 +22,7 @@ public class CounterStore extends Store {
     @Override
     public void onAction(Action action) {
         if (action instanceof CounterAction counterAction) {
-            state = ModifiableCounterState.modify(state, counterAction);
+            state = CounterStateReducer.reduce(state, counterAction);
         }
 
         emitChange(state);

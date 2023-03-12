@@ -12,17 +12,21 @@ public class CounterApp extends Application {
     private final Dispatcher dispatcher;
     private final CounterStore counterStore;
 
-    public CounterApp() {
-        dispatcher = new Dispatcher();
+    public CounterApp(Dispatcher dispatcher) {
+        this.dispatcher = dispatcher;
         counterStore = new CounterStore();
         // Add the store to the dispatcher
         // so that it can be called when
         // the dispatcher receives actions
-        dispatcher.register(counterStore);
+        this.dispatcher.register(counterStore);
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public CounterState getState() {
+        return counterStore.getState();
     }
 
     @Override
@@ -40,7 +44,7 @@ public class CounterApp extends Application {
         // it can be updated when changes occur
         counterStore.register(counterView);
         // Set the initial state of the view
-        counterView.update(counterStore.getState());
+        counterView.update(getState());
 
         return counterView;
     }

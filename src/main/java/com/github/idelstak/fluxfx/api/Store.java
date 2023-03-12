@@ -2,6 +2,7 @@ package com.github.idelstak.fluxfx.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Platform;
 
 public abstract class Store {
 
@@ -20,9 +21,7 @@ public abstract class Store {
     }
 
     protected void emitChange(State state) {
-        for (View view : views) {
-            view.update(state);
-        }
+        Platform.runLater(() -> views.forEach(view -> view.update(state)));
     }
 
     public abstract void onAction(Action action);
